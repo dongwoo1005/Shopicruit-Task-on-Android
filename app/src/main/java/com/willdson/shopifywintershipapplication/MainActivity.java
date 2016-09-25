@@ -19,7 +19,8 @@ public class MainActivity extends AppCompatActivity {
         MainViewModel viewModel = new MainViewModel();
         mBinding.setViewModel(viewModel);
 
-        computeTotalCostOfClockAndWatch();
+        mBrain = new Brain(mBinding.getViewModel());
+        mBinding.setBrain(mBrain);
     }
 
     @Override
@@ -27,11 +28,5 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         mBrain.onDestroy();
         mBinding.unbind();
-    }
-
-    private void computeTotalCostOfClockAndWatch() {
-        mBrain = new Brain(this, mBinding.getViewModel());
-        mBrain.getAllProducts();
-        mBrain.computeTotalCostOfClockAndWatch();
     }
 }

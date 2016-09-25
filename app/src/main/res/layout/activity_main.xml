@@ -5,6 +5,9 @@
         <variable
             name="viewModel"
             type="com.willdson.shopifywintershipapplication.MainViewModel" />
+        <variable
+            name="brain"
+            type="com.willdson.shopifywintershipapplication.Brain" />
     </data>
     <RelativeLayout
         android:id="@+id/activity_main"
@@ -20,6 +23,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{viewModel.currentState}" />
+
+        <Button
+            android:text="Send Request"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button2"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:onClick="@{brain::sendRequest}"/>
+
+        <Button
+            android:text="Compute Cost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button"
+            android:onClick="@{brain::computeCost}"
+            android:layout_above="@+id/button2"
+            android:layout_centerHorizontal="true" />
     </RelativeLayout>
 </layout>
 
