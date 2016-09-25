@@ -7,7 +7,7 @@ I implemented this application with scaling up in mind
 - Used [Retrofit 2](http://square.github.io/retrofit/) as HTTP Client, [RxJava](https://github.com/ReactiveX/RxJava) to handle networking asynchronously, [Gson](https://github.com/google/gson) to parse json and map them to POJO
 
 ## Requirement to run
-Need JDK8 to be installed
+You need JDK8 installed on your machine
 
 ## Output
 ![Shopify Winternship Application Screenshot](ShopifyWinternshipApplicationOutput.png)
