@@ -12,7 +12,7 @@ import com.willdson.shopifywintershipapplication.injection.module.NetModule;
 
 public class ApplicationController extends Application {
 
-    private String SHOPICRUIT_BASE_URL = "https://shopicruit.myshopify.com";
+    private String SHOPICRUIT_BASE_URL = "https://shopicruit.myshopify.com/";
     private NetComponent mNetComponent;
 
     @Override
