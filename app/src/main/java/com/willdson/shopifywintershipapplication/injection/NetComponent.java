@@ -1,6 +1,6 @@
 package com.willdson.shopifywintershipapplication.injection;
 
-import com.willdson.shopifywintershipapplication.Brain;
+import com.willdson.shopifywintershipapplication.MainHandler;
 import com.willdson.shopifywintershipapplication.injection.module.AppModule;
 import com.willdson.shopifywintershipapplication.injection.module.NetModule;
 
@@ -15,5 +15,5 @@ import dagger.Component;
 @Singleton
 @Component(modules = { AppModule.class, NetModule.class })
 public interface NetComponent {
-    void inject(Brain brain);
+    void inject(MainHandler handler);
 }

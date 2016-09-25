@@ -6,8 +6,8 @@
             name="viewModel"
             type="com.willdson.shopifywintershipapplication.MainViewModel" />
         <variable
-            name="brain"
-            type="com.willdson.shopifywintershipapplication.Brain" />
+            name="handler"
+            type="com.willdson.shopifywintershipapplication.MainHandler" />
     </data>
     <RelativeLayout
         android:id="@+id/activity_main"
@@ -35,7 +35,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:onClick="@{brain::sendRequest}"/>
+            android:onClick="@{handler::sendRequest}"/>
 
     </RelativeLayout>
 </layout>

@@ -9,7 +9,7 @@ import com.willdson.shopifywintershipapplication.databinding.ActivityMainBinding
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding mBinding;
-    private Brain mBrain;
+    private MainHandler mHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,14 +19,14 @@ public class MainActivity extends AppCompatActivity {
         MainViewModel viewModel = new MainViewModel();
         mBinding.setViewModel(viewModel);
 
-        mBrain = new Brain(mBinding.getViewModel());
-        mBinding.setBrain(mBrain);
+        mHandler = new MainHandler(mBinding.getViewModel());
+        mBinding.setHandler(mHandler);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mBrain.onDestroy();
+        mHandler.onDestroy();
         mBinding.unbind();
     }
 }

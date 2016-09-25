@@ -1,9 +1,5 @@
 package com.willdson.shopifywintershipapplication.injection.module;
 
-import android.app.Application;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -14,7 +10,6 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -35,34 +30,23 @@ public class NetModule {
 
     @Provides
     @Singleton
-    SharedPreferences providesSharedPreferences(Application application) {
-        return PreferenceManager.getDefaultSharedPreferences(application);
-    }
-
-    @Provides
-    @Singleton
-    Cache providesOkHttpCache(Application application) {
-        int cacheSize = 10 * 1024 * 1024;
-        Cache cache = new Cache(application.getCacheDir(), cacheSize);
-        return cache;
-    }
-
-    @Provides
-    @Singleton
     Gson providesGson() {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
-//        gsonBuilder.
         return gsonBuilder.create();
     }
 
     @Provides
     @Singleton
-    OkHttpClient providesOkHttpClient(Cache cache) {
+    StethoInterceptor providesStethoInterceptor() {
+        return new StethoInterceptor();
+    }
 
+    @Provides
+    @Singleton
+    OkHttpClient providesOkHttpClient(StethoInterceptor stethoInterceptor) {
         OkHttpClient client = new OkHttpClient.Builder()
-//                .cache(cache)
-                .addNetworkInterceptor(new StethoInterceptor())
+                .addNetworkInterceptor(stethoInterceptor)
                 .build();
         return client;
     }

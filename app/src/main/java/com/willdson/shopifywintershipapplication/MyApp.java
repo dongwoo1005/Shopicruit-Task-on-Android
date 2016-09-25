@@ -14,7 +14,8 @@ import com.willdson.shopifywintershipapplication.injection.module.NetModule;
  */
 
 public class MyApp extends Application {
-    private String SHOPICRUIT_BASE_URL = "http://shopicruit.myshopify.com/";
+
+    private static final String SHOPICRUIT_BASE_URL = "http://shopicruit.myshopify.com/";
     private NetComponent mNetComponent;
     private static Context mContext;
 

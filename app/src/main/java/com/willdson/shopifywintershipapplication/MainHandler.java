@@ -29,7 +29,7 @@ import static android.content.ContentValues.TAG;
  * Created by dwson on 9/24/16.
  */
 
-public class Brain {
+public class MainHandler {
 
     @Inject
     ShopifyAPI shopifyAPI;
@@ -38,7 +38,7 @@ public class Brain {
     private List<Product> mProducts = new ArrayList<Product>();
     private CompositeSubscription mCompositeSubscription = new CompositeSubscription();
 
-    public Brain(MainViewModel viewModel) {
+    public MainHandler(MainViewModel viewModel) {
 
         Application app = (Application) MyApp.getContext();
         ((MyApp) app).getNetComponent()
@@ -51,7 +51,13 @@ public class Brain {
         mCompositeSubscription.unsubscribe();
     }
 
-    public void getProductsFromPage(int page) {
+    public void sendRequest(View view) {
+        Log.d(TAG, "sendRequest: ");
+        mProducts = new ArrayList<Product>();
+        getProductsFromPage(1);
+    }
+
+    private void getProductsFromPage(int page) {
 
         final List<Product> productsOnPage = new ArrayList<Product>();
 
@@ -93,11 +99,11 @@ public class Brain {
         mCompositeSubscription.add(subscription);
     }
 
-    public void computeTotalCostOfClockAndWatch() {
+    private void computeTotalCostOfClockAndWatch() {
 
         Log.d(TAG, "computeTotalCostOfClockAndWatch: products size " + mProducts.size());
 //        double totalCost = Stream.of(mProducts)
-//                .filter(product -> product.productType == "Clock" || product.productType == "Watch")
+//                .filter(product -> product.isClock() || product.isWatch())
 //                .map(product -> product.variants)
 //                .flatMap(variants -> Stream.of(variants))
 //                .map(variant -> Double.parseDouble(variant.price))
@@ -106,7 +112,7 @@ public class Brain {
 
         double total = 0;
         for (Product product : mProducts) {
-            if (product.productType.equalsIgnoreCase("Clock") || product.productType.equalsIgnoreCase("Watch")) {
+            if (product.isClock() || product.isWatch()) {
                 for (Variant variant : product.variants) {
                     total += Double.parseDouble(variant.price);
                 }
@@ -116,11 +122,5 @@ public class Brain {
         DecimalFormat df = new DecimalFormat("0.00");
         Log.d(TAG, "computeTotalCostOfClockAndWatch: " + df.format(total));
         mViewModel.addState("Total cost of clock and watch is $" + df.format(total));
-    }
-
-    public void sendRequest(View view) {
-        Log.d(TAG, "sendRequest: ");
-        mProducts = new ArrayList<Product>();
-        getProductsFromPage(1);
     }
 }

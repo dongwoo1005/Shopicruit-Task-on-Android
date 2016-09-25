@@ -22,4 +22,12 @@ public class Product {
     public List<Variant> variants = new ArrayList<Variant>();
     public List<Image> images = new ArrayList<Image>();
     public List<Option> options = new ArrayList<Option>();
+
+    public Boolean isClock() {
+        return productType.equalsIgnoreCase("Clock");
+    }
+
+    public Boolean isWatch() {
+        return productType.equalsIgnoreCase("Watch");
+    }
 }

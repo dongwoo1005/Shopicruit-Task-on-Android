@@ -16,11 +16,6 @@ public class MainViewModel extends BaseObservable {
         return this.currentState;
     }
 
-    public void setCurrentState(String state) {
-        this.currentState = state;
-        notifyPropertyChanged(BR.currentState);
-    }
-
     public void addState(String state) {
         currentState += state + "\n";
         notifyPropertyChanged(BR.currentState);
