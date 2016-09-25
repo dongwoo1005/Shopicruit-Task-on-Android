@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.willdson.shopifywintershipapplication.data.ShopifyAPI;
 
 import javax.inject.Singleton;
 
@@ -78,5 +79,11 @@ public class NetModule {
                 .client(okHttpClient)
                 .build();
         return retrofit;
+    }
+
+    @Provides
+    @Singleton
+    ShopifyAPI providesShopifyAPI(Retrofit retrofit) {
+        return retrofit.create(ShopifyAPI.class);
     }
 }

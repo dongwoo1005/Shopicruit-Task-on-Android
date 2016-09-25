@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Product {
 
-    public long id;
+    public Long id;
     public String title;
     public String handle;
     public String bodyHtml;

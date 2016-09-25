@@ -1,9 +1,14 @@
 apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     defaultConfig {
         applicationId "com.willdson.shopifywintershipapplication"
         minSdkVersion 15
@@ -17,6 +22,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    dataBinding {
+        enabled = true
     }
 }
 
@@ -42,4 +50,7 @@ dependencies {
     apt 'com.google.dagger:dagger-compiler:2.5'
     compile 'com.google.dagger:dagger:2.5'
     provided 'javax.annotation:jsr250-api:1.0'
+
+    // Java 8 Stream
+    compile 'com.annimon:stream:1.1.2'
 }
