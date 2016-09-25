@@ -1,4 +1,4 @@
-package com.willdson.shopifywintershipapplication;
+package com.willdson.shopifywintershipapplication.data.model;
 
 /**
  * Created by dwson on 9/24/16.

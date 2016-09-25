@@ -1,4 +1,4 @@
-package com.willdson.shopifywintershipapplication;
+package com.willdson.shopifywintershipapplication.data.model;
 
 import java.util.ArrayList;
 import java.util.List;
