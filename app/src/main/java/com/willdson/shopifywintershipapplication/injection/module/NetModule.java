@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -57,8 +58,11 @@ public class NetModule {
     @Provides
     @Singleton
     OkHttpClient providesOkHttpClient(Cache cache) {
-        OkHttpClient client = new OkHttpClient();
-        client.newBuilder().cache(cache);
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .cache(cache)
+                .addNetworkInterceptor(new StethoInterceptor())
+                .build();
         return client;
     }
 

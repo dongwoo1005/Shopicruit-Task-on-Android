@@ -3,6 +3,7 @@ package com.willdson.shopifywintershipapplication;
 import android.app.Application;
 import android.content.Context;
 
+import com.facebook.stetho.Stetho;
 import com.willdson.shopifywintershipapplication.injection.DaggerNetComponent;
 import com.willdson.shopifywintershipapplication.injection.NetComponent;
 import com.willdson.shopifywintershipapplication.injection.module.AppModule;
@@ -22,6 +23,7 @@ public class MyApp extends Application {
         super.onCreate();
 
         this.mContext = this;
+        Stetho.initializeWithDefaults(this);
     }
 
     public NetComponent getNetComponent() {
