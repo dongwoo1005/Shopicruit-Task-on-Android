@@ -9,7 +9,7 @@ import android.databinding.Bindable;
 
 public class MainViewModel extends BaseObservable {
 
-    public String currentState = "default state";
+    public String currentState = "";
 
     @Bindable
     public String getCurrentState() {
@@ -18,6 +18,11 @@ public class MainViewModel extends BaseObservable {
 
     public void setCurrentState(String state) {
         this.currentState = state;
+        notifyPropertyChanged(BR.currentState);
+    }
+
+    public void addState(String state) {
+        currentState += state + "\n";
         notifyPropertyChanged(BR.currentState);
     }
 }

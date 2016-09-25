@@ -20,9 +20,12 @@
         tools:context="com.willdson.shopifywintershipapplication.MainActivity">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{viewModel.currentState}" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@{viewModel.currentState}"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_above="@+id/button2" />
 
         <Button
             android:text="Send Request"
@@ -34,14 +37,6 @@
             android:layout_alignParentEnd="true"
             android:onClick="@{brain::sendRequest}"/>
 
-        <Button
-            android:text="Compute Cost"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/button"
-            android:onClick="@{brain::computeCost}"
-            android:layout_above="@+id/button2"
-            android:layout_centerHorizontal="true" />
     </RelativeLayout>
 </layout>
 

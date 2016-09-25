@@ -60,8 +60,9 @@ public class Brain {
             @Override
             public void onCompleted() {
                 Log.d(TAG, "onCompleted: " + productsOnPage.size());
-                mViewModel.setCurrentState("completed handling page " + page);
+                mViewModel.addState("Completed handling page " + page);
                 if (!productsOnPage.isEmpty()) getProductsFromPage(page + 1);
+                else computeTotalCostOfClockAndWatch();
             }
 
             @Override
@@ -73,16 +74,14 @@ public class Brain {
                     Log.d(TAG, "onError: code " + code);
                 }
                 e.printStackTrace();
-                mViewModel.setCurrentState("an error occurred");
+                mViewModel.addState("an error occurred");
             }
 
             @Override
             public void onNext(ProductsResponse productsResponse) {
-
                 Log.d(TAG, "onNext: ");
                 productsOnPage.addAll(productsResponse.products);
                 mProducts.addAll(productsResponse.products);
-//                mViewModel.setCurrentState("mapping response to object");
             }
         };
 
@@ -108,7 +107,6 @@ public class Brain {
         double total = 0;
         for (Product product : mProducts) {
             if (product.productType.equalsIgnoreCase("Clock") || product.productType.equalsIgnoreCase("Watch")) {
-                Log.d(TAG, "computeTotalCostOfClockAndWatch: ya im in");
                 for (Variant variant : product.variants) {
                     total += Double.parseDouble(variant.price);
                 }
@@ -116,17 +114,13 @@ public class Brain {
         }
 
         DecimalFormat df = new DecimalFormat("0.00");
-        mViewModel.setCurrentState("Total cost of clock and watch is $" + df.format(total));
+        Log.d(TAG, "computeTotalCostOfClockAndWatch: " + df.format(total));
+        mViewModel.addState("Total cost of clock and watch is $" + df.format(total));
     }
 
     public void sendRequest(View view) {
         Log.d(TAG, "sendRequest: ");
         mProducts = new ArrayList<Product>();
         getProductsFromPage(1);
-    }
-
-    public void computeCost(View view) {
-        Log.d(TAG, "retry: ");
-        computeTotalCostOfClockAndWatch();
     }
 }
