@@ -10,4 +10,4 @@ I implemented this application with scaling up in mind
 Need JDK8 to be installed
 
 ## Output
-![Shopify Winternship Application Screenshot](http://dongwoo1005.github.io/image/ShopifyWinternshipApplication.png)
+![Shopify Winternship Application Screenshot](https://raw.githubusercontent.com/dongwoo1005/Shopify-Wintership-Application/master/ShopifyWinternshipApplicationOutput.png)
