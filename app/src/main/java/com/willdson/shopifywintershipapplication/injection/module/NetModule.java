@@ -15,6 +15,7 @@ import dagger.Provides;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -62,9 +63,17 @@ public class NetModule {
 
     @Provides
     @Singleton
-    Retrofit providesRetrofit(Gson gson, OkHttpClient okHttpClient) {
+    RxJavaCallAdapterFactory providesRxAdapter() {
+        RxJavaCallAdapterFactory rxAdapter = RxJavaCallAdapterFactory.create();
+        return rxAdapter;
+    }
+
+    @Provides
+    @Singleton
+    Retrofit providesRetrofit(Gson gson, OkHttpClient okHttpClient, RxJavaCallAdapterFactory rxAdapter) {
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(rxAdapter)
                 .baseUrl(mBaseUrl)
                 .client(okHttpClient)
                 .build();

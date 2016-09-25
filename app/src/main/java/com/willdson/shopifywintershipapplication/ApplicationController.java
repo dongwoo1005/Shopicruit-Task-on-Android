@@ -2,8 +2,9 @@ package com.willdson.shopifywintershipapplication;
 
 import android.app.Application;
 
-import com.willdson.shopifywintershipapplication.injection.module.AppModule;
+import com.willdson.shopifywintershipapplication.injection.DaggerNetComponent;
 import com.willdson.shopifywintershipapplication.injection.NetComponent;
+import com.willdson.shopifywintershipapplication.injection.module.AppModule;
 import com.willdson.shopifywintershipapplication.injection.module.NetModule;
 
 /**

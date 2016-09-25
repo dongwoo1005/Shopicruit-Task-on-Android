@@ -4,9 +4,9 @@ import com.willdson.shopifywintershipapplication.data.model.Product;
 
 import java.util.List;
 
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
+import rx.Observable;
 
 /**
  * Created by dwson on 9/24/16.
@@ -15,7 +15,7 @@ import retrofit2.http.Query;
 public interface ShopifyAPI {
 
     @GET("products.json")
-    Call<List<Product>> getProductsOnPage(
+    Observable<List<Product>> getProductsOnPage(
             @Query("page") int page
     );
 }
