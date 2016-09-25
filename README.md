@@ -1,4 +1,4 @@
-# Shopify Wintership Application
+# Shopify Winternship Application
 Hacking total cost to buy all the clocks and watches in the store [Shopicruit](http://shopicruit.myshopify.com/)
 
 ## Overview
