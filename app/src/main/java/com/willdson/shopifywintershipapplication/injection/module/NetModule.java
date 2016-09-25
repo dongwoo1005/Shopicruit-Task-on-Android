@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
+import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.willdson.shopifywintershipapplication.data.ShopifyAPI;
@@ -50,7 +51,8 @@ public class NetModule {
     @Singleton
     Gson providesGson() {
         GsonBuilder gsonBuilder = new GsonBuilder();
-//        gsonBuilder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
+        gsonBuilder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
+//        gsonBuilder.
         return gsonBuilder.create();
     }
 

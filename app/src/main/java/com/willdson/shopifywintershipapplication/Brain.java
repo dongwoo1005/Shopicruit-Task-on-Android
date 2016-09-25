@@ -4,11 +4,12 @@ import android.app.Application;
 import android.util.Log;
 import android.view.View;
 
-import com.annimon.stream.Stream;
 import com.willdson.shopifywintershipapplication.data.ShopifyAPI;
 import com.willdson.shopifywintershipapplication.data.model.Product;
 import com.willdson.shopifywintershipapplication.data.model.ProductsResponse;
+import com.willdson.shopifywintershipapplication.data.model.Variant;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,7 +60,7 @@ public class Brain {
             @Override
             public void onCompleted() {
                 Log.d(TAG, "onCompleted: " + productsOnPage.size());
-                mViewModel.setCurrentState("completed handling response successfully");
+                mViewModel.setCurrentState("completed handling page " + page);
                 if (!productsOnPage.isEmpty()) getProductsFromPage(page + 1);
             }
 
@@ -81,7 +82,7 @@ public class Brain {
                 Log.d(TAG, "onNext: ");
                 productsOnPage.addAll(productsResponse.products);
                 mProducts.addAll(productsResponse.products);
-                mViewModel.setCurrentState("mapping response to object");
+//                mViewModel.setCurrentState("mapping response to object");
             }
         };
 
@@ -96,14 +97,26 @@ public class Brain {
     public void computeTotalCostOfClockAndWatch() {
 
         Log.d(TAG, "computeTotalCostOfClockAndWatch: products size " + mProducts.size());
-        int totalCostOfClockAndWatch = Stream.of(mProducts)
-                .filter(product -> product.productType == "Clock" || product.productType == "Watch")
-                .map(product -> product.variants)
-                .flatMap(variants -> Stream.of(variants))
-                .mapToInt(variant -> Integer.parseInt(variant.price))
-                .sum();
+//        double totalCost = Stream.of(mProducts)
+//                .filter(product -> product.productType == "Clock" || product.productType == "Watch")
+//                .map(product -> product.variants)
+//                .flatMap(variants -> Stream.of(variants))
+//                .map(variant -> Double.parseDouble(variant.price))
+//                .reduce(0.0, Double::sum);
 
-        mViewModel.setCurrentState("Total cost of clock and watch is " + totalCostOfClockAndWatch);
+
+        double total = 0;
+        for (Product product : mProducts) {
+            if (product.productType.equalsIgnoreCase("Clock") || product.productType.equalsIgnoreCase("Watch")) {
+                Log.d(TAG, "computeTotalCostOfClockAndWatch: ya im in");
+                for (Variant variant : product.variants) {
+                    total += Double.parseDouble(variant.price);
+                }
+            }
+        }
+
+        DecimalFormat df = new DecimalFormat("0.00");
+        mViewModel.setCurrentState("Total cost of clock and watch is $" + df.format(total));
     }
 
     public void sendRequest(View view) {
